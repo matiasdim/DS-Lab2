@@ -8,26 +8,27 @@ import java.util.*;
 
 public class ComputePi {
     public static void main(String args[]) {
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter a number 1 to Compute Pi, 2 to compute primes or 3 to exit: ");
-        int n = reader.nextInt();
-        if (n == 1){
-            Scanner rdr = new Scanner(System.in);
-            System.out.println("Computing Pi. Enter the number to be computed: ");
-            int number = rdr.nextInt();
-            ComputePi.calculatePi(args, number);
-        }else if (n == 2){
-            Scanner rdr = new Scanner(System.in);
-            System.out.println("Computing Primes in a range. Enter the lower value: ");
-            int minVal = rdr.nextInt();
-            System.out.println("And now enter the upper value: ");
-            int maxVal = rdr.nextInt();
-            ComputePi.calculatePrimes(args, minVal, maxVal);
-        }else{
-            System.out.println("Exiting...");
-            System.exit(0);
+        while (true){
+            Scanner reader = new Scanner(System.in);
+            System.out.println("Enter 1 to Compute Pi, 2 to compute primes or 3 to exit: ");
+            int n = reader.nextInt();
+            if (n == 1){
+                Scanner rdr = new Scanner(System.in);
+                System.out.println("Computing Pi. Enter the number to be computed: ");
+                int number = rdr.nextInt();
+                ComputePi.calculatePi(args, number);
+            }else if (n == 2){
+                Scanner rdr = new Scanner(System.in);
+                System.out.println("Computing Primes in a range. Enter the lower value: ");
+                int minVal = rdr.nextInt();
+                System.out.println("And now enter the upper value: ");
+                int maxVal = rdr.nextInt();
+                ComputePi.calculatePrimes(args, minVal, maxVal);
+            }else if (n == 3){
+                System.out.println("Exiting...");
+                System.exit(0);
+            }
         }
-
     }
 
     public static void calculatePi(String args[], int val1){
