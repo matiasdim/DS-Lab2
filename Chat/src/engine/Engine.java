@@ -21,7 +21,7 @@ public class Engine implements PresenceService {
             System.setSecurityManager(new SecurityManager());
         }
         try {
-            String name = "Engine";
+            String name = "PresenceService";
             PresenceService service = new Engine();
             PresenceService stub = (PresenceService) UnicastRemoteObject.exportObject(service, 0);
             Registry registry = LocateRegistry.getRegistry();

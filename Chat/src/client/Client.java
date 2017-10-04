@@ -23,29 +23,30 @@ public class Client {
             System.err.println("PresenceService exception:");
             e.printStackTrace();
         }
-        while (true) {
-            //Registriation
-            String username = args[1];
-            String host = "localhost";
-            int port = 1099;
-            // Checks existance of optional args => host and port
-            if (args.length >= 4 && args[2] != null && args[3] != null) {
-                host = args[2];
-                port = Integer.parseInt(args[3]);
-            }
+        //Registriation
+        String username = args[1];
+        String host = "localhost";
+        int port = 1099;
+        // Checks existance of optional args => host and port
+        if (args.length >= 4 && args[2] != null && args[3] != null) {
+            host = args[2];
+            port = Integer.parseInt(args[3]);
+        }
 
-            // Startup client (registration)
-            RegistrationInfo reg = new RegistrationInfo(username, host, port, true);
-            Boolean startedUp = Client.startup(service, reg);
-            if (startedUp) {
-                String[] commandPrefixes = {"friends", "talk", "broadcast", "busy", "available", "exit"};
-
+        // Startup client (registration)
+        RegistrationInfo reg = new RegistrationInfo(username, host, port, true);
+        Boolean startedUp = Client.startup(service, reg);
+        if (startedUp) {
+            System.out.println("Welcome " + username + ".");
+            while (true) {
                 Scanner reader = new Scanner(System.in);
+                System.out.println();
                 System.out.println("Please enter a valid command: ");
                 String clInput = reader.next();
                 if (clInput.equals("exit"))
                 {
                     System.out.println("Exiting...");
+                    Client.removeUser(service, reg);
                     System.exit(0); // or break;?
 
                 } else if (clInput.equals("available"))
@@ -74,14 +75,21 @@ public class Client {
                 {
                     Vector<RegistrationInfo> friends = Client.listFriends(service);
                     System.out.println("List of friends:");
-                    System.out.println();
+                    String status = "";
                     for (RegistrationInfo user: friends) {
-                        System.out.println(user.getUserName() + " (" + user.getStatus() + ")");
+                        if (user.getStatus()){
+                            status = "Available";
+                        }else{
+                            status = "Busy";
+                        }
+                        System.out.println(user.getUserName() + " (" + status + ")");
                     }
+                }else{
+                    System.out.println("Command not detected. Try again!");
                 }
-            } else {
-                System.out.println("Somebody with the given name already exists in the system. Try again!");
             }
+        } else {
+            System.out.println("Somebody with the given name already exists in the system. Exiting...");
         }
     }
 
@@ -119,5 +127,14 @@ public class Client {
             e.printStackTrace();
         }
         return friends;
+    }
+
+    public static void removeUser(PresenceService service, RegistrationInfo reg){
+        try {
+            service.unregister(reg.getUserName());
+        } catch (Exception e) {
+            System.err.println("listRegisteredUsers exception:");
+            e.printStackTrace();
+        }
     }
 }
