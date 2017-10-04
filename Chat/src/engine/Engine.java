@@ -10,6 +10,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Vector;
 
 public class Engine implements PresenceService {
+
+    Vector<RegistrationInfo> users = new Vector<>();
+
     public Engine() {
         super();
     }
@@ -32,26 +35,54 @@ public class Engine implements PresenceService {
 
     @Override
     public boolean register(RegistrationInfo reg) throws RemoteException {
-        return false;
+        boolean status = true;
+        for (RegistrationInfo register: users) {
+            if (register.getUserName().equals(reg.getUserName())){
+                status = false;
+                break;
+            }
+        }
+        if (status){
+            this.users.add(reg);
+        }
+        return status;
     }
 
     @Override
     public boolean updateRegistrationInfo(RegistrationInfo reg) throws RemoteException {
-        return false;
+        boolean status = false;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserName().equals(reg.getUserName())){
+                status = true;
+                this.users.set(i, reg);
+                break;
+            }
+        }
+        return status;
     }
 
     @Override
     public RegistrationInfo lookup(String name) throws RemoteException {
+        for (RegistrationInfo register: users) {
+            if (register.getUserName().equals(name)){
+                return register;
+            }
+        }
         return null;
     }
 
     @Override
     public void unregister(String userName) throws RemoteException {
-
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserName().equals(userName)){
+                users.remove(i);
+            }
+        }
     }
 
     @Override
     public Vector<RegistrationInfo> listRegisteredUsers() throws RemoteException {
-        return null;
+        return users;
     }
+
 }

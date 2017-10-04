@@ -5,6 +5,7 @@ package server;
  * @author Jonathan Engelsma
  * @version 1.0
  */
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Vector;
