@@ -8,6 +8,18 @@ import java.util.*;
 
 public class ComputePi {
     public static void main(String args[]) {
+        Compute comp = null;
+        if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
+        }
+        try {
+            String name = "Compute";
+            Registry registry = LocateRegistry.getRegistry(args[0]);
+            comp = (Compute) registry.lookup(name);
+        } catch (Exception e) {
+            System.err.println("ComputePi exception:");
+            e.printStackTrace();
+        }
         while (true){
             Scanner reader = new Scanner(System.in);
             System.out.println("Enter 1 to Compute Pi, 2 to compute primes or 3 to exit: ");
@@ -16,14 +28,14 @@ public class ComputePi {
                 Scanner rdr = new Scanner(System.in);
                 System.out.println("Computing Pi. Enter the number to be computed: ");
                 int number = rdr.nextInt();
-                ComputePi.calculatePi(args, number);
+                ComputePi.calculatePi(comp, number);
             }else if (n == 2){
                 Scanner rdr = new Scanner(System.in);
                 System.out.println("Computing Primes in a range. Enter the lower value: ");
                 int minVal = rdr.nextInt();
                 System.out.println("And now enter the upper value: ");
                 int maxVal = rdr.nextInt();
-                ComputePi.calculatePrimes(args, minVal, maxVal);
+                ComputePi.calculatePrimes(comp, minVal, maxVal);
             }else if (n == 3){
                 System.out.println("Exiting...");
                 System.exit(0);
@@ -31,14 +43,8 @@ public class ComputePi {
         }
     }
 
-    public static void calculatePi(String args[], int val1){
-        if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }
+    public static void calculatePi(Compute comp, int val1){
         try {
-            String name = "Compute";
-            Registry registry = LocateRegistry.getRegistry(args[0]);
-            Compute comp = (Compute) registry.lookup(name);
             Pi task = new Pi(val1);
             BigDecimal pi = comp.executeTask(task);
             System.out.println(pi);
@@ -48,14 +54,8 @@ public class ComputePi {
         }
     }
 
-    public static void calculatePrimes(String args[], int minVal, int maxVal){
-        if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-        }
+    public static void calculatePrimes(Compute comp, int minVal, int maxVal){
         try {
-            String name = "Compute";
-            Registry registry = LocateRegistry.getRegistry(args[0]);
-            Compute comp = (Compute) registry.lookup(name);
             Primes task = new Primes(minVal, maxVal);
             int[] primes = comp.executeTask(task);
             System.out.println("The prime numbers between " + minVal + " and " + maxVal + " are: ");
