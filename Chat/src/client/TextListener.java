@@ -27,6 +27,7 @@ public class TextListener implements Runnable {
                     if(line == null) {
                         break;
                     }
+                    System.out.println();
                     System.out.println(line);
                 }
             } catch (IOException e) {
