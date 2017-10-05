@@ -1,9 +1,16 @@
 package client;
 
+import java.io.IOException;
+import java.io.PrintStream;
+import java.net.ServerSocket;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 import java.util.Vector;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 
 import server.PresenceService;
 import server.RegistrationInfo;
@@ -17,39 +24,73 @@ public class Client {
         }
         try {
             String name = "PresenceService";
-            Registry registry = LocateRegistry.getRegistry(args[0]);
+
+            String host = "localhost";
+            int port = 1099;
+            // Checks existance of optional args => host and port
+            if (args.length >= 2 && args[1] != null) {
+                host = args[1];
+            }
+            if (args.length >= 3 && args[2] != null){
+                port = Integer.parseInt(args[2]);
+            }
+            Registry registry = LocateRegistry.getRegistry(host, port);
             service = (PresenceService) registry.lookup(name);
         } catch (Exception e) {
             System.err.println("PresenceService exception:");
             e.printStackTrace();
         }
-        //Registriation
-        String username = args[1];
-        String host = "localhost";
-        int port = 1099;
-        // Checks existance of optional args => host and port
-        if (args.length >= 4 && args[2] != null && args[3] != null) {
-            host = args[2];
-            port = Integer.parseInt(args[3]);
+        /*
+         * Registriation section
+         */
+        String username = args[0]; // Save username coming from start process
+        // Sockets!
+        //  To listen
+        ServerSocket serverSocket = null;
+        Socket socket = null; // This one is to receive messages
+        //  To hear
+        Socket clientSocket = null; // This one is to send messages
+        PrintStream os;
+        String userHost = "localhost";
+        int userPort = 9999;
+        //Getting the local IP
+        InetAddress ip;
+        Thread thread;
+        try {
+            ip = InetAddress.getLocalHost();
+            userHost = ip.getHostAddress(); // update to host
+            serverSocket = new ServerSocket(0);
+            userPort = serverSocket.getLocalPort(); // Update port
+            thread = new Thread(new TextListener(serverSocket));
+            thread.start();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
+        System.out.println("User host: " + userHost);
+        System.out.println("User port: " + userPort);
         // Startup client (registration)
-        RegistrationInfo reg = new RegistrationInfo(username, host, port, true);
+        RegistrationInfo reg = new RegistrationInfo(username, userHost, userPort, true);
         Boolean startedUp = Client.startup(service, reg);
         if (startedUp) {
             System.out.println("Welcome " + username + ".");
             while (true) {
+                // Read inputs to Run chat
                 Scanner reader = new Scanner(System.in);
                 System.out.println();
-                System.out.println("Please enter a valid command: ");
-                String clInput = reader.next();
-                if (clInput.equals("exit"))
+                System.out.print(username + " > ");
+                String clInput = reader.nextLine();
+                String[] inputParts= clInput.split("\\s");
+                if (inputParts[0].equals("exit"))
                 {
                     System.out.println("Exiting...");
                     Client.removeUser(service, reg);
                     System.exit(0); // or break;?
 
-                } else if (clInput.equals("available"))
+                } else if (inputParts[0].equals("available"))
                 {
                     if (reg.getStatus() == true){
                         System.out.println("You are already available.");
@@ -57,7 +98,7 @@ public class Client {
                         Client.updateUserStatus(service, reg);
                     }
 
-                } else if (clInput.equals("busy"))
+                } else if (inputParts[0].equals("busy"))
                 {
                     if (reg.getStatus() == false){
                         System.out.println("You are already not available.");
@@ -65,16 +106,68 @@ public class Client {
                         Client.updateUserStatus(service, reg);
                     }
 
-                } else if (clInput.startsWith("broadcast"))
+                } else if (inputParts[0].equals("broadcast"))
                 {
+                    if (inputParts.length < 2) {
+                        System.out.println("Command to send message seems to be malformed. Try again.");
+                    }else{
 
-                } else if (clInput.startsWith("talk"))
+                    }
+                    Vector<RegistrationInfo> friends = Client.listFriends(service);
+                    Vector<RegistrationInfo> friendsAvailable =  new Vector<>();
+                    for (RegistrationInfo user: friends){
+                        if (user.getStatus() && !user.getUserName().equals(reg.getUserName())){
+                            friendsAvailable.add(user);
+                        }
+                    }
+                    if (friendsAvailable.size() > 0){
+                        for (RegistrationInfo user: friendsAvailable){
+                            String message = clInput.substring(clInput.indexOf(' ')+1); // Removing first word from input to only get message
+                            message = "Message from " + reg.getUserName() + ": " + message;
+                            try{
+                                clientSocket = new Socket(user.getHost(), user.getPort());
+                                os = new PrintStream(clientSocket.getOutputStream());
+                                os.println(message);
+                                clientSocket.close();
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                } else if (inputParts[0].equals("talk"))
                 {
+                    if (inputParts.length < 3) {
+                        System.out.println("Command to send message seems to be malformed. Try again.");
+                    }else{
+                        RegistrationInfo user = Client.lookForAUser(service,inputParts[1]);
+                        if (user == null){
+                            System.out.println("User does no exists.");
+                        }else{
+                            if (!user.getStatus()){
+                                System.out.println("User is not available");
+                            }else{
+                                String message = clInput.substring(clInput.indexOf(' ')+2); // Removing first two words from input to only get message
+                                message = "Message from " + reg.getUserName() + ": " + message;
+                                try{
+                                    clientSocket = new Socket(user.getHost(), user.getPort());
+                                    os = new PrintStream(clientSocket.getOutputStream());
+                                    os.println(message);
+                                    clientSocket.close();
+                                } catch (IOException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
 
-                } else if (clInput.equals("friends"))
+                } else if (inputParts[0].equals("friends"))
                 {
                     Vector<RegistrationInfo> friends = Client.listFriends(service);
-                    System.out.println("List of friends:");
+                    System.out.println("Online friends:");
+                    System.out.println("-----------------");
                     String status = "";
                     for (RegistrationInfo user: friends) {
                         if (user.getStatus()){
@@ -92,6 +185,8 @@ public class Client {
             System.out.println("Somebody with the given name already exists in the system. Exiting...");
         }
     }
+
+
 
     // User registration upon startup
     public static Boolean startup(PresenceService service, RegistrationInfo reg){
@@ -136,5 +231,16 @@ public class Client {
             System.err.println("listRegisteredUsers exception:");
             e.printStackTrace();
         }
+    }
+
+    public static RegistrationInfo lookForAUser(PresenceService service, String username){
+        RegistrationInfo reg = null;
+        try {
+            reg = service.lookup(username);
+        } catch (Exception e) {
+            System.err.println("listRegisteredUsers exception:");
+            e.printStackTrace();
+        }
+        return reg;
     }
 }
