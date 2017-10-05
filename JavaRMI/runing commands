@@ -1,0 +1,12 @@
+java -cp /Users/matiasdim/Documents/Maestria/Fall-2017/656-Distributed\ Systems/Labs/Lab2/JavaRMI/src:/Users/matiasdim/Documents/Maestria/Fall-2017/656-Distributed\ Systems/Labs/Lab2/JavaRMI/src/compute.jar -Djava.rmi.server.codebase=file:///Users/matiasdim/Documents/Maestria/Fall-2017/656-Distributed\ Systems/Labs/Lab2/JavaRMI/src/compute.jar -Djava.rmi.server.useCodebaseOnly=false -Djava.rmi.server.hostname=localhost -Djava.security.policy=/Users/matiasdim/Documents/Maestria/Fall-2017/656-Distributed\ Systems/Labs/Lab2/JavaRMI/src/engine/server.policy engine.ComputeEngine
+
+---
+rmiregistry &
+
+--
+Compile ComputePI:
+javac -cp compute.jar client/ComputePi.java client/Pi.java client/Primes.java client/ComputePrimes.java
+
+---
+RUn computePi actualizado
+java -cp /Users/matiasdim/Documents/Maestria/Fall-2017/656-Distributed\ Systems/Labs/Lab2/JavaRMI/src:/Users/matiasdim/Documents/Maestria/Fall-2017/656-Distributed\ Systems/Labs/Lab2/JavaRMI/src/compute.jar -Djava.rmi.server.codebase=http://localhost/classes/compute.jar -Djava.security.policy=/Users/matiasdim/Documents/Maestria/Fall-2017/656-Distributed\ Systems/Labs/Lab2/JavaRMI/src/client/client.policy client.ComputePi localhost
