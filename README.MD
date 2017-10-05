@@ -19,9 +19,13 @@ The project structure is:
     * Functionality to send message to a particular user
     * Functionality to send a message to all the available users
     * Static functions for communication with the presence server (Registration, search user, update status, list users, remove user).
+    * Auxiliar static functions to format the message to be sent and another one to activate socket and message sending
     * Aditionally the console prints has codification to print with colors and style a little bit the console.
-  * TextListener.java:
+    
+  * TextListener.java: It is just a class implementing Runnable that fires a thread that will be listening for messages. It is instantiated from CLient.java.
 
 * engine package
+  * Engine.java: It has all the implementations of the methos of its interface (PresenceService).
 
 * server package
+  * Here are both provided files the PresenceService interface and RegistrationInfo.java
