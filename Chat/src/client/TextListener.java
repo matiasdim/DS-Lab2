@@ -22,6 +22,7 @@ public class TextListener implements Runnable {
             String line;
             BufferedReader is;
             try {
+                // Put client to listen for messages
                 clientSocket = echoServer.accept();
                 is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 while(true) {
@@ -30,8 +31,8 @@ public class TextListener implements Runnable {
                         break;
                     }
                     System.out.println();
-                    System.out.println(line);
-                    System.out.print(this.clientUsername + " > ");
+                    System.out.println((char)27 + "[38;5;202m"+ line + (char)27 + "[0m");
+                    System.out.print((char)27 + "[38;5;118m"+ this.clientUsername + " ➜ " + (char)27 + "[0m");
                 }
             } catch (IOException e) {
                 // TODO Auto-generated catch block
