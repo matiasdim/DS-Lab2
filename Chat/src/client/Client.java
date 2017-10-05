@@ -140,8 +140,9 @@ public class Client {
                         break;
                     case "friends":
                         Vector<RegistrationInfo> onlineFriends = Client.listFriends(service);
+                        System.out.println((char)27 + "[38;5;251m----------------" + (char)27 + "[0m");
                         System.out.println((char)27 + "[38;5;251mOnline friends:" + (char)27 + "[0m");
-                        System.out.println((char)27 + "[38;5;251m--------------------" + (char)27 + "[0m");
+                        System.out.println((char)27 + "[38;5;251m----------------" + (char)27 + "[0m");
                         String status = "";
                         for (RegistrationInfo user : onlineFriends) {
                             if (user.getStatus()) {
