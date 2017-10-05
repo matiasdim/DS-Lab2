@@ -18,8 +18,8 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="138" column="79" lean-forward="false" selection-start-line="138" selection-start-column="79" selection-end-line="138" selection-end-column="79" />
+            <state relative-caret-position="429">
+              <caret line="184" column="35" lean-forward="true" selection-start-line="184" selection-start-column="35" selection-end-line="184" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -30,8 +30,8 @@
       <file leaf-file-name="TextListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/TextListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="24" column="51" lean-forward="true" selection-start-line="24" selection-start-column="51" selection-end-line="24" selection-end-column="51" />
+            <state relative-caret-position="292">
+              <caret line="26" column="29" lean-forward="false" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -64,6 +64,7 @@
       <find>friendsAvailable</find>
       <find>os</find>
       <find>&gt;</find>
+      <find>clientUsername</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -306,12 +307,12 @@
       <updated>1507077451299</updated>
       <workItem from="1507077454690" duration="9210000" />
       <workItem from="1507140206699" duration="4068000" />
-      <workItem from="1507145983084" duration="24271000" />
+      <workItem from="1507145983084" duration="25979000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37549000" />
+    <option name="totallyTimeSpent" value="39257000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="23" width="1220" height="773" extended-state="0" />
@@ -488,8 +489,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/TextListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="24" column="51" lean-forward="true" selection-start-line="24" selection-start-column="51" selection-end-line="24" selection-end-column="51" />
+        <state relative-caret-position="292">
+          <caret line="26" column="29" lean-forward="false" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -498,8 +499,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="138" column="79" lean-forward="false" selection-start-line="138" selection-start-column="79" selection-end-line="138" selection-end-column="79" />
+        <state relative-caret-position="429">
+          <caret line="184" column="35" lean-forward="true" selection-start-line="184" selection-start-column="35" selection-end-line="184" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

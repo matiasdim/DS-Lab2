@@ -76,11 +76,13 @@ public class Client {
         Boolean startedUp = Client.startup(service, reg);
         if (startedUp) {
             System.out.println("Welcome " + username + ".");
+            System.out.println();
+            System.out.print(username + " > ");
             while (true) {
                 // Read inputs to Run chat
                 Scanner reader = new Scanner(System.in);
-                System.out.println();
-                System.out.print(username + " > ");
+
+
                 String clInput = reader.nextLine();
                 String[] inputParts= clInput.split("\\s");
                 if (inputParts[0].equals("exit"))
@@ -96,7 +98,8 @@ public class Client {
                     }else{
                         Client.updateUserStatus(service, reg);
                     }
-
+                    System.out.println();
+                    System.out.print(username + " > ");
                 } else if (inputParts[0].equals("busy"))
                 {
                     if (reg.getStatus() == false){
@@ -104,7 +107,8 @@ public class Client {
                     }else{
                         Client.updateUserStatus(service, reg);
                     }
-
+                    System.out.println();
+                    System.out.print(username + " > ");
                 } else if (inputParts[0].equals("broadcast"))
                 {
                     if (inputParts.length < 2) {
@@ -121,12 +125,13 @@ public class Client {
                     }
                     if (friendsAvailable.size() > 0){
                         for (RegistrationInfo user: friendsAvailable){
-                            String message = clInput.substring(clInput.indexOf(' ')+1); // Removing first word from input to only get message
+                            String message = Client.joinString(1, inputParts);//clInput.substring(clInput.indexOf(' ')+1); // Removing first word from input to only get message
                             message = "Message from " + reg.getUserName() + ": " + message;
                             Client.sendMessage(user.getHost(), user.getPort(), message);
                         }
                     }
-
+                    System.out.println();
+                    System.out.print(username + " > ");
                 } else if (inputParts[0].equals("talk"))
                 {
                     if (inputParts.length < 3) {
@@ -139,13 +144,14 @@ public class Client {
                             if (user.getUserName().equals(reg.getUserName()) || !user.getStatus()){
                                 System.out.println("User is not available");
                             }else{
-                                String message = clInput.substring(clInput.indexOf(' ')+2); // Removing first two words from input to only get message
+                                String message = Client.joinString(2, inputParts); // Removing first two words from input to only get message
                                 message = "Message from " + reg.getUserName() + ": " + message;
                                 Client.sendMessage(user.getHost(), user.getPort(), message);
                             }
                         }
                     }
-
+                    System.out.println();
+                    System.out.print(username + " > ");
                 } else if (inputParts[0].equals("friends"))
                 {
                     Vector<RegistrationInfo> friends = Client.listFriends(service);
@@ -160,13 +166,25 @@ public class Client {
                         }
                         System.out.println(user.getUserName() + " (" + status + ")");
                     }
+                    System.out.println();
+                    System.out.print(username + " > ");
                 }else{
                     System.out.println("Command not detected. Try again!");
+                    System.out.println();
+                    System.out.print(username + " > ");
                 }
             }
         } else {
             System.out.println("Somebody with the given name already exists in the system. Exiting...");
         }
+    }
+
+    public static String joinString(int index, String[] array){
+        String text = "";
+        for (int i = index; i < array.length; i++){
+            text += array[i] + " ";
+        }
+        return text;
     }
 
     // Snippet to send message to a user via socket

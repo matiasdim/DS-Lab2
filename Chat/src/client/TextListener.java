@@ -25,13 +25,13 @@ public class TextListener implements Runnable {
                 clientSocket = echoServer.accept();
                 is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 while(true) {
-                    System.out.print(this.clientUsername + " > ");
                     line = is.readLine();
                     if(line == null) {
                         break;
                     }
                     System.out.println();
                     System.out.println(line);
+                    System.out.print(this.clientUsername + " > ");
                 }
             } catch (IOException e) {
                 // TODO Auto-generated catch block
