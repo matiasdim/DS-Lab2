@@ -60,7 +60,7 @@ public class Client {
             userHost = ip.getHostAddress(); // update to host
             serverSocket = new ServerSocket(0);
             userPort = serverSocket.getLocalPort(); // Update port
-            thread = new Thread(new TextListener(serverSocket));
+            thread = new Thread(new TextListener(serverSocket, username));
             thread.start();
         } catch (UnknownHostException e) {
             e.printStackTrace();
@@ -136,7 +136,7 @@ public class Client {
                         if (user == null){
                             System.out.println("User does no exists.");
                         }else{
-                            if (!user.getStatus()){
+                            if (user.getUserName().equals(reg.getUserName()) || !user.getStatus()){
                                 System.out.println("User is not available");
                             }else{
                                 String message = clInput.substring(clInput.indexOf(' ')+2); // Removing first two words from input to only get message

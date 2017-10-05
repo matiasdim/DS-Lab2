@@ -9,9 +9,11 @@ import java.net.Socket;
 public class TextListener implements Runnable {
     ServerSocket echoServer = null;
     Socket clientSocket = null;
+    String clientUsername;
 
-    public TextListener(ServerSocket serverSocket){
+    public TextListener(ServerSocket serverSocket, String clientUsername){
         this.echoServer = serverSocket;
+        this.clientUsername = clientUsername;
     }
 
     @Override
@@ -23,6 +25,7 @@ public class TextListener implements Runnable {
                 clientSocket = echoServer.accept();
                 is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 while(true) {
+                    System.out.print(this.clientUsername + " > ");
                     line = is.readLine();
                     if(line == null) {
                         break;
