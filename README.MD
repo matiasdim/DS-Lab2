@@ -1,6 +1,6 @@
 # CIS655 - Lab 01 - Matías Gil Echavarría
 
-### ComputePi:
+### JavaRMI(ComputePi):
 It is just the Java RMi official demo adding into ComputePi.java class a functionality to input from console. Depending of this input it calculates Pi, or primes of a range or exits. 
 The Primes computation is performed on the class Primes.java.
 
