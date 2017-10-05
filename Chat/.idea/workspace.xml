@@ -18,8 +18,8 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="122" column="53" lean-forward="true" selection-start-line="122" selection-start-column="53" selection-end-line="122" selection-end-column="53" />
+            <state relative-caret-position="431">
+              <caret line="185" column="0" lean-forward="true" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,6 +50,7 @@
       <find>malform</find>
       <find>lisf</find>
       <find>friendsAvailable</find>
+      <find>os</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -292,12 +293,12 @@
       <updated>1507077451299</updated>
       <workItem from="1507077454690" duration="9210000" />
       <workItem from="1507140206699" duration="4068000" />
-      <workItem from="1507145983084" duration="22569000" />
+      <workItem from="1507145983084" duration="22977000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35847000" />
+    <option name="totallyTimeSpent" value="36255000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="60" y="23" width="1220" height="773" extended-state="0" />
@@ -486,8 +487,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="122" column="53" lean-forward="true" selection-start-line="122" selection-start-column="53" selection-end-line="122" selection-end-column="53" />
+        <state relative-caret-position="431">
+          <caret line="185" column="0" lean-forward="true" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

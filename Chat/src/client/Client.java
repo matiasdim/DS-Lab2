@@ -50,7 +50,6 @@ public class Client {
         Socket socket = null; // This one is to receive messages
         //  To hear
         Socket clientSocket = null; // This one is to send messages
-        PrintStream os;
         String userHost = "localhost";
         int userPort = 9999;
         //Getting the local IP
@@ -124,15 +123,7 @@ public class Client {
                         for (RegistrationInfo user: friendsAvailable){
                             String message = clInput.substring(clInput.indexOf(' ')+1); // Removing first word from input to only get message
                             message = "Message from " + reg.getUserName() + ": " + message;
-                            try{
-                                clientSocket = new Socket(user.getHost(), user.getPort());
-                                os = new PrintStream(clientSocket.getOutputStream());
-                                os.println(message);
-                                clientSocket.close();
-                            } catch (IOException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            }
+                            Client.sendMessage(user.getHost(), user.getPort(), message);
                         }
                     }
 
@@ -150,15 +141,7 @@ public class Client {
                             }else{
                                 String message = clInput.substring(clInput.indexOf(' ')+2); // Removing first two words from input to only get message
                                 message = "Message from " + reg.getUserName() + ": " + message;
-                                try{
-                                    clientSocket = new Socket(user.getHost(), user.getPort());
-                                    os = new PrintStream(clientSocket.getOutputStream());
-                                    os.println(message);
-                                    clientSocket.close();
-                                } catch (IOException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
-                                }
+                                Client.sendMessage(user.getHost(), user.getPort(), message);
                             }
                         }
                     }
@@ -183,6 +166,20 @@ public class Client {
             }
         } else {
             System.out.println("Somebody with the given name already exists in the system. Exiting...");
+        }
+    }
+
+    // Snippet to send message to a user via socket
+    public static void sendMessage(String userHost, int userPort, String message){
+        try{
+            Socket clientSocket = new Socket(userHost, userPort);
+            PrintStream os;
+            os = new PrintStream(clientSocket.getOutputStream());
+            os.println(message);
+            clientSocket.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
