@@ -18,8 +18,8 @@
       <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="144" column="77" lean-forward="false" selection-start-line="144" selection-start-column="77" selection-end-line="144" selection-end-column="77" />
+            <state relative-caret-position="94">
+              <caret line="25" column="56" lean-forward="false" selection-start-line="25" selection-start-column="56" selection-end-line="25" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -27,11 +27,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TextListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/TextListener.java">
+      <file leaf-file-name="run_client.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run_client.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="34" column="88" lean-forward="false" selection-start-line="34" selection-start-column="88" selection-end-line="34" selection-end-column="88" />
+            <state relative-caret-position="300">
+              <caret line="20" column="206" lean-forward="true" selection-start-line="20" selection-start-column="206" selection-end-line="20" selection-end-column="206" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Engine.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/engine/Engine.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="23" column="26" lean-forward="false" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -50,7 +60,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>PresenceService</find>
       <find>commandPrefixes</find>
       <find>reb</find>
       <find>rebin</find>
@@ -70,6 +79,7 @@
       <find>clientSocket</find>
       <find>friend</find>
       <find>says</find>
+      <find>PresenceService</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -88,11 +98,12 @@
         <option value="$PROJECT_DIR$/src/engine/server.policy" />
         <option value="$PROJECT_DIR$/src/client/RegistrationInfo.java" />
         <option value="$PROJECT_DIR$/src/server/RegistrationInfo.java" />
-        <option value="$PROJECT_DIR$/src/engine/Engine.java" />
         <option value="$PROJECT_DIR$/src/client/echoServer.java" />
         <option value="$PROJECT_DIR$/src/client/ProcessIncomingRequest.java" />
         <option value="$PROJECT_DIR$/src/client/EchoServer.java" />
         <option value="$PROJECT_DIR$/src/client/TextListener.java" />
+        <option value="$PROJECT_DIR$/src/engine/Engine.java" />
+        <option value="$PROJECT_DIR$/run_client.sh" />
         <option value="$PROJECT_DIR$/src/client/Client.java" />
       </list>
     </option>
@@ -314,12 +325,12 @@
       <workItem from="1507140206699" duration="4068000" />
       <workItem from="1507145983084" duration="25979000" />
       <workItem from="1507213642879" duration="210000" />
-      <workItem from="1507215106239" duration="7644000" />
+      <workItem from="1507215106239" duration="8895000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47111000" />
+    <option name="totallyTimeSpent" value="48362000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
@@ -499,34 +510,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/PresenceService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="27" column="37" lean-forward="false" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/RegistrationInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-384">
-          <caret line="18" column="27" lean-forward="true" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/Engine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="52" lean-forward="true" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/TextListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -537,10 +520,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/RegistrationInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="28" column="47" lean-forward="true" selection-start-line="28" selection-start-column="47" selection-end-line="28" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/PresenceService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="19" column="32" lean-forward="false" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/Engine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="23" column="26" lean-forward="false" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_client.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="206" lean-forward="true" selection-start-line="20" selection-start-column="206" selection-end-line="20" selection-end-column="206" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="144" column="77" lean-forward="false" selection-start-line="144" selection-start-column="77" selection-end-line="144" selection-end-column="77" />
+        <state relative-caret-position="94">
+          <caret line="25" column="56" lean-forward="false" selection-start-line="25" selection-start-column="56" selection-end-line="25" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

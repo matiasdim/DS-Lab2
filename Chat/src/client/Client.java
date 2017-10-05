@@ -23,7 +23,7 @@ public class Client {
             System.setSecurityManager(new SecurityManager());
         }
         try {
-            String name = "PresenceService";
+            String name = "PresenceService"; //"Server";
 
             String host = "localhost";
             int port = 1099;
